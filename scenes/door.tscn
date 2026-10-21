@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c3bnkn0mo2vr"]
+
+[ext_resource type="Texture2D" uid="uid://b1gmlpic0ykc8" path="res://assets/images/Tilemap/Terrain (16x16).png" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://dptuhda7fkuqs" path="res://scripts/door.gd" id="1_uvdjg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p03ti"]
+size = Vector2(14, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hxei"]
+size = Vector2(14, 33)
+
+[sub_resource type="Animation" id="Animation_hpvv5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uvdjg"]
+resource_name = "up"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -25), Vector2(0, -50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83dcw"]
+_data = {
+&"RESET": SubResource("Animation_hpvv5"),
+&"up": SubResource("Animation_uvdjg")
+}
+
+[node name="Door" type="StaticBody2D" unique_id=1287873961]
+script = ExtResource("1_uvdjg")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=96946903]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_p03ti")
+
+[node name="AnimatedSprite2D" type="AnimatableBody2D" parent="." unique_id=1544373642]
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D" unique_id=1063217231]
+texture_filter = 1
+position = Vector2(0, -2.5)
+scale = Vector2(1, 1.1785715)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(241.15889, 83.954666, 14.522903, 28.457237)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D" unique_id=1375853390]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_3hxei")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=1491362387]
+libraries/ = SubResource("AnimationLibrary_83dcw")
