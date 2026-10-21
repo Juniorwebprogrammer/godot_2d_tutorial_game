@@ -13,7 +13,7 @@ var tween
 var finish
 
 var current_level_root: Node = null
-var level: int = 1
+var level: int = 3
 var score: int = 0
 var total_collectabled_item_for_level: int = 0
 var first_load: bool = true
@@ -75,6 +75,7 @@ func _setup_level() -> void:
 func _win_the_game() -> void:
 	await _fate(1.0)
 	winLabel.visible = true
+	music.stop()
 
 # Signal handlers
 
